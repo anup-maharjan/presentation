@@ -1,0 +1,729 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Build</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai.css">
+
+    <style>
+      html {
+        font-size: 10px;
+      }
+      .reveal{
+        font-size: 3em;
+      }
+      [hidden] {
+        display: block !important;
+      }
+      .shadow-none {
+        box-shadow: none !important;
+      }
+    </style>
+
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+            <h1>new build</h1>
+            <!-- <ul>
+              <li>System requirements</li>
+              <li>how to</li>
+              <li>what included</li>
+              <li>gulp overview</li>
+              <li>gulp usage</li>
+              <li>webpack overview</li>
+              <li>webpack usage</li>
+              <li>future upgrades</li>
+            </ul> -->
+          </section>
+          <section>
+            <h3>System requirements</h3>
+            <div class="row">
+              <div class="col-6">
+                <p>Node JS 8+</p>
+                <pre><code class="hljs" data-trim data-line-numbers="1">node -v</code></pre>
+              </div>
+              <div class="col-6">
+                <p>NPM 6+</p>
+                <pre><code class="hljs" data-trim data-line-numbers="1">npm -v</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3>Installation</h3>
+            <div class="row">
+              <div class="col-6">
+                <p>Install GULP Js globally, CLI version 2+</p>
+                <pre><code class="hljs" data-trim data-line-numbers="1">gulp -v</code></pre>
+              </div>
+              <div class="col-6">
+                <p>Install Yeoman and generator</p>
+            <pre><code class="hljs" data-trim data-line-numbers="1-5">
+npm install -g yo
+npm install -g generator-p2h</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3>Usage</h3>
+            <div class="row">
+              <div class="col-6">
+                <p>To generate your new project:</p>
+                <pre><code class="hljs" data-trim data-line-numbers="1">yo p2h</code></pre>
+              </div>
+              <div class="col-6">
+                <p>You will see prompt menu like this</p>
+                <img class="img-fluid w-100 shadow-none border-0" src="https://scrstorage.s3.amazonaws.com/2._Desktop_node_2019-04-03_14-36-05.jpg" alt="yo p2h">
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3>What inside?</h3>
+            <img class="img-fluid mx-auto d-block bg-transparent border-0 shadow-none" src="images/webpackgulp1.png" width="900" alt="">
+          </section>
+          <section>
+            <section>
+              <img class="img-fluid mx-auto d-block bg-transparent border-0 shadow-none" src="https://gulpjs.com/img/gulp-white-text.svg" width="900" alt="">
+            </section>
+            <section>
+              <h3>Basic commands</h3>
+              <div class="row text-left py-4">
+                <div class="col-3">
+                  <pre class="m-0"><code class="hljs" data-trim data-line-numbers="1">gulp</code></pre>
+                </div>
+                <div class="col flex-grow-1 h4">
+                  this will compile the entire project into development mode, start browserSync on localhost and will watch all the changes to the SCSS, html, images etc.
+                </div>
+              </div>
+              <div class="row text-left py-4 mb-5">
+                <div class="col-3">
+                  <pre class="m-0"><code class="hljs" data-trim data-line-numbers="1">gulp dist</code></pre>
+                </div>
+                <div class="col flex-grow-1 h4">
+                  this is used to compile project assets into production.
+                </div>
+              </div>
+              <div class="row text-left py-4 mb-5">
+                <div class="col-3">
+                  <pre class="m-0"><code class="hljs" data-trim data-line-numbers="1">gulp zip</code></pre>
+                </div>
+                <div class="col flex-grow-1 h4">
+                  compress all files into zip (except node_modules folder). The name of ZIP is the same as the project folder.
+                </div>
+              </div>
+              <h4>Additional commands for CSS compilation:</h4>
+              <div class="row text-left py-4">
+                <div class="col-4">
+                  <pre class="m-0"><code class="hljs" data-trim data-line-numbers="1">gulp compact</code></pre>
+                </div>
+                <div class="col-4">
+                  <pre class="m-0"><code class="hljs" data-trim data-line-numbers="1">gulp compressed</code></pre>
+                </div>
+                <div class="col-4">
+                  <pre class="m-0"><code class="hljs" data-trim data-line-numbers="1">gulp nested</code></pre>
+                </div>
+              </div>
+              <p class="text-left font-italic"><small><i>NOTE: this is for css output control</i></small></p>
+            </section>
+            <section>
+              <h3>Project structure</h3>
+              <div class="row mb-5">
+                <div class="col-6">
+                  <img class="img-fluid w-100 shadow-none border-0" src="https://scrstorage.s3.amazonaws.com/markup_2019-04-04_10-45-24.jpg" alt="">
+                </div>
+                <div class="col-6">
+                  <table class="table h6" style="table-layout: fixed;">
+                    <tbody>
+                      <tr>
+                        <td><code class="text-nowrap hljs" data-trim data-line-numbers="1">gulp</code></td>
+                        <td>folder with gulp tasks</td>
+                      </tr>
+                      <tr>
+                        <td><code class="text-nowrap hljs" data-trim data-line-numbers="1">src</code></td>
+                        <td>folder with source files</td>
+                      </tr>
+                      <tr>
+                        <td><code class="text-nowrap hljs" data-trim data-line-numbers="1">babel.config.js</code></td>
+                        <td>configuration file for Babel (es6 code transpiler)</td>
+                      </tr>
+                      <tr>
+                        <td><code class="text-nowrap hljs" data-trim data-line-numbers="1">eslintrc.js</code></td>
+                        <td>configuration file Eslint</td>
+                      </tr>
+                      <tr>
+                        <td><code class="text-nowrap hljs" data-trim data-line-numbers="1">gulpfile.js</code></td>
+                        <td>GULP main file</td>
+                      </tr>
+                      <tr>
+                        <td><code class="text-nowrap hljs" data-trim data-line-numbers="1">htmlhint.config.js</code></td>
+                        <td>configuration file for HTML hint</td>
+                      </tr>
+                      <tr>
+                        <td><code class="text-nowrap hljs" data-trim data-line-numbers="1">package.json</code></td>
+                        <td>project dependencies</td>
+                      </tr>
+                      <tr>
+                        <td><code class="text-nowrap hljs" data-trim data-line-numbers="1">prettier.config.js</code></td>
+                        <td>configuration file for Prettier (code formatter)</td>
+                      </tr>
+                      <tr>
+                        <td><code class="text-nowrap hljs" data-trim data-line-numbers="1">README.md</code></td>
+                        <td>Short guide for build</td>
+                      </tr>
+                      <tr>
+                        <td><code class="text-nowrap hljs" data-trim data-line-numbers="1">sass-lint.yml</code></td>
+                        <td>configuration file for SASS/SCSS linter</td>
+                      </tr>
+                      <tr>
+                        <td><code class="text-nowrap hljs" data-trim data-line-numbers="1">webpack.config.js</code></td>
+                        <td>configuration file for webpack (if chosen)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <small><div class="text-info">P.S. all files are mandatory. everything should be included into the zip for the client. <div class="text-danger">except node_modules</div></div></small>
+            </section>
+            <section>
+              <h3>Source files</h3>
+              <div class="row">
+                <div class="col-6">
+                  <img class="img-fluid w-100 shadow-none border-0" src="https://scrstorage.s3.amazonaws.com/src_2019-04-04_11-07-21.jpg" alt="">
+                </div>
+                <div class="col-6 text-left">
+                  <p class="small">All files compile to the dist folder, from which start browserSync</p>
+                  <br>
+                  <p class="small">For AJAX files create folder <code>inc</code> in the root of <code>src</code> folder.</p>
+                </div>
+              </div>
+            </section>
+          </section>
+          <section>
+            <section>
+              <img class="border-0 shadow-none bg-transparent d-block" src="https://webpack.js.org/e0b5805d423a4ec9473ee315250968b2.svg" alt="">
+            </section>
+            <section>
+              <h3>What is webpack?</h3>
+              <div class="fragment fade-in-then-out">
+                <svg width="1000" class="d-block mx-auto w-100" viewBox="0 0 1088 615" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g stroke-width="1" fill="none" fill-rule="evenodd">
+                        <text font-family="'Source Sans Pro', sans-serif" font-size="18" font-weight="600" fill="#86A5BA">
+                            <tspan x="933.778" y="459">STATIC ASSETS</tspan>
+                        </text>
+                        <g transform="translate(1002, 326)">
+                            <g>
+                                <use fill-opacity="0.1" fill="#526B78" fill-rule="evenodd" xlink:href="#path-1"></use>
+                                <rect stroke="#526B78" stroke-width="4" x="-2" y="-2" width="84" height="84" rx="3"></rect>
+                            </g>
+                            <text font-family="'Source Sans Pro', sans-serif" font-size="22" font-weight="500" fill="#FFFFFF">
+                                <tspan x="18.891" y="46.7096774">.png</tspan>
+                            </text>
+                        </g>
+                        <g transform="translate(1002, 214)">
+                            <g>
+                                <use fill-opacity="0.1" fill="#526B78" fill-rule="evenodd" xlink:href="#path-2"></use>
+                                <rect stroke="#526B78" stroke-width="4" x="-2" y="-2" width="84" height="84" rx="3"></rect>
+                            </g>
+                            <text font-family="'Source Sans Pro', sans-serif" font-size="22" font-weight="500" fill="#FFFFFF">
+                                <tspan x="22.532" y="46.7096774">.css</tspan>
+                            </text>
+                        </g>
+                        <g transform="translate(894, 326)">
+                            <g>
+                                <use fill-opacity="0.1" fill="#526B78" fill-rule="evenodd" xlink:href="#path-3"></use>
+                                <rect stroke="#526B78" stroke-width="4" x="-2" y="-2" width="84" height="84" rx="3"></rect>
+                            </g>
+                            <text font-family="'Source Sans Pro', sans-serif" font-size="22" font-weight="500" fill="#FFFFFF">
+                                <tspan x="21.817" y="46.7096774">.jpg</tspan>
+                            </text>
+                        </g>
+                        <g transform="translate(894, 214)">
+                            <g>
+                                <use fill-opacity="0.1" fill="#526B78" fill-rule="evenodd" xlink:href="#path-4"></use>
+                                <rect stroke="#526B78" stroke-width="4" x="-2" y="-2" width="84" height="84" rx="3"></rect>
+                            </g>
+                            <text font-family="'Source Sans Pro', sans-serif" font-size="22" font-weight="500" fill="#FFFFFF">
+                                <tspan x="29" y="46.7096774">.js</tspan>
+                            </text>
+                        </g>
+                        <g transform="translate(342, 225)" stroke="#7E8C94" stroke-width="4">
+                            <path d="M499.558824,86.52 C499.558824,86.52 484.852941,81.02 439.908088,109.436667 C394.963235,137.853333 380.992647,164.436667 380.992647,164.436667" stroke-dasharray="7"></path>
+                            <path d="M499.558824,86.0616667 C499.558824,86.0616667 484.852941,91.5616667 439.908088,63.145 C394.963235,34.7283333 380.992647,8.145 380.992647,8.145" stroke-dasharray="7"></path>
+                            <path d="M0.477941176,170.395 C0.477941176,170.395 169.382939,98.895 447.847936,98.895" stroke-dasharray="6"></path>
+                            <path d="M0.477941176,72.395 C0.477941176,72.395 169.382939,0.895 447.847936,0.895" stroke-dasharray="6" transform="translate(224.162939, 36.645000) scale(1, -1) translate(-224.162939, -36.645000) "></path>
+                        </g>
+                        <text font-family="'Source Sans Pro', sans-serif" font-size="18" font-weight="600" fill="#86A5BA">
+                            <tspan x="24.934" y="562">MODULES WITH DEPENDENCIES</tspan>
+                        </text>
+                        <g transform="translate(228, 335)">
+                            <g>
+                                <use fill-opacity="0.1" fill="#526B78" fill-rule="evenodd" xlink:href="#path-5"></use>
+                                <rect stroke="#526B78" stroke-width="4" x="-2" y="-2" width="66" height="66" rx="3"></rect>
+                            </g>
+                            <text font-family="'Source Sans Pro', sans-serif" font-size="22" font-weight="500" fill="#FFFFFF">
+                                <tspan x="12.817" y="38">.jpg</tspan>
+                            </text>
+                        </g>
+                        <g transform="translate(228, 223)">
+                            <g>
+                                <use fill-opacity="0.1" fill="#526B78" fill-rule="evenodd" xlink:href="#path-6"></use>
+                                <rect stroke="#526B78" stroke-width="4" x="-2" y="-2" width="66" height="66" rx="3"></rect>
+                            </g>
+                            <text font-family="'Source Sans Pro', sans-serif" font-size="22" font-weight="500" fill="#FFFFFF">
+                                <tspan x="9.891" y="38">.png</tspan>
+                            </text>
+                        </g>
+                        <g transform="translate(302, 414.500000) scale(1, -1) translate(-302, -414.500000) translate(182, 404)">
+                            <rect fill="#BBDBEC" x="0" y="0" width="2" height="6"></rect>
+                            <rect fill="#BBDBEC" x="76" y="6" width="2" height="12"></rect>
+                            <rect fill="#BBDBEC" transform="translate(75.304690, 4.704683) rotate(-45) translate(-75.304690, -4.704683) " x="74.3046896" y="1.87968342" width="2" height="5.6500001"></rect>
+                            <rect fill="#BBDBEC" x="2" y="2" width="72" height="2"></rect>
+                            <polyline stroke="#BBDBEC" stroke-width="2" points="80 12 77 20.8000002 74 12"></polyline>
+                        </g>
+                        <g transform="translate(116, 391)">
+                            <g>
+                                <use fill-opacity="0.1" fill="#526B78" fill-rule="evenodd" xlink:href="#path-7"></use>
+                                <rect stroke="#526B78" stroke-width="4" x="-2" y="-2" width="66" height="66" rx="3"></rect>
+                            </g>
+                            <text font-family="'Source Sans Pro', sans-serif" font-size="22" font-weight="500" fill="#FFFFFF">
+                                <tspan x="8.076" y="38">.sass</tspan>
+                            </text>
+                        </g>
+                        <g transform="translate(116, 279)">
+                            <g>
+                                <use fill-opacity="0.1" fill="#526B78" fill-rule="evenodd" xlink:href="#path-8"></use>
+                                <rect stroke="#526B78" stroke-width="4" x="-2" y="-2" width="66" height="66" rx="3"></rect>
+                            </g>
+                            <text font-family="'Source Sans Pro', sans-serif" font-size="22" font-weight="500" fill="#FFFFFF">
+                                <tspan x="8.076" y="38">.sass</tspan>
+                            </text>
+                        </g>
+                        <g transform="translate(182, 201)">
+                            <rect fill="#BBDBEC" x="0" y="0" width="2" height="6"></rect>
+                            <rect fill="#BBDBEC" x="76" y="113" width="2" height="12"></rect>
+                            <rect fill="#BBDBEC" transform="translate(75.304690, 111.704683) rotate(-45) translate(-75.304690, -111.704683) " x="74.3046896" y="108.879683" width="2" height="5.6500001"></rect>
+                            <rect fill="#BBDBEC" x="26" y="109" width="48" height="2"></rect>
+                            <rect fill="#BBDBEC" transform="translate(24.704683, 108.304690) rotate(-45) translate(-24.704683, -108.304690) " x="23.7046835" y="105.47969" width="2" height="5.6500001"></rect>
+                            <rect fill="#BBDBEC" x="22" y="6" width="2" height="101"></rect>
+                            <rect fill="#BBDBEC" transform="translate(21.304690, 4.704683) rotate(-45) translate(-21.304690, -4.704683) " x="20.3046896" y="1.87968342" width="2" height="5.6500001"></rect>
+                            <rect fill="#BBDBEC" x="2" y="2" width="18" height="2"></rect>
+                            <polyline stroke="#BBDBEC" stroke-width="2" points="80 118 77 126.8 74 118"></polyline>
+                        </g>
+                        <g transform="translate(182, 189)">
+                            <rect fill="#BBDBEC" x="0" y="0" width="2" height="6"></rect>
+                            <rect fill="#BBDBEC" x="76" y="6" width="2" height="19"></rect>
+                            <rect fill="#BBDBEC" transform="translate(75.304690, 4.704683) rotate(-45) translate(-75.304690, -4.704683) " x="74.3046896" y="1.87968342" width="2" height="5.6500001"></rect>
+                            <rect fill="#BBDBEC" x="2" y="2" width="72" height="2"></rect>
+                            <polyline stroke="#BBDBEC" stroke-width="2" points="80 18 77 26.8000002 74 18"></polyline>
+                        </g>
+                        <g transform="translate(116, 167)">
+                            <g>
+                                <use fill-opacity="0.1" fill="#526B78" fill-rule="evenodd" xlink:href="#path-9"></use>
+                                <rect stroke="#526B78" stroke-width="4" x="-2" y="-2" width="66" height="66" rx="3"></rect>
+                            </g>
+                            <text font-family="'Source Sans Pro', sans-serif" font-size="22" font-weight="500" fill="#FFFFFF">
+                                <tspan x="20" y="38">.js</tspan>
+                            </text>
+                        </g>
+                        <g transform="translate(110, 470.500000) scale(1, -1) translate(-190, -470.500000) translate(150, 460)">
+                            <rect fill="#BBDBEC" x="0" y="0" width="2" height="6"></rect>
+                            <rect fill="#BBDBEC" x="76" y="6" width="2" height="12"></rect>
+                            <rect fill="#BBDBEC" transform="translate(75.304690, 4.704683) rotate(-45) translate(-75.304690, -4.704683) " x="74.3046896" y="1.87968342" width="2" height="5.6500001"></rect>
+                            <rect fill="#BBDBEC" x="2" y="2" width="72" height="2"></rect>
+                            <polyline stroke="#BBDBEC" stroke-width="2" points="80 12 77 20.8000002 74 12"></polyline>
+                        </g>
+                        <g transform="translate(4, 447)">
+                            <g>
+                                <use fill-opacity="0.1" fill="#526B78" fill-rule="evenodd" xlink:href="#path-10"></use>
+                                <rect stroke="#526B78" stroke-width="4" x="-2" y="-2" width="66" height="66" rx="3"></rect>
+                            </g>
+                            <text font-family="'Source Sans Pro', sans-serif" font-size="22" font-weight="500" fill="#FFFFFF">
+                                <tspan x="8.076" y="38">.sass</tspan>
+                            </text>
+                        </g>
+                        <g transform="translate(70, 363)">
+                            <rect fill="#BBDBEC" x="0" y="0" width="2" height="6"></rect>
+                            <rect fill="#BBDBEC" x="76" y="6" width="2" height="12"></rect>
+                            <rect fill="#BBDBEC" transform="translate(75.304690, 4.704683) rotate(-45) translate(-75.304690, -4.704683) " x="74.3046896" y="1.87968342" width="2" height="5.6500001"></rect>
+                            <rect fill="#BBDBEC" x="2" y="2" width="72" height="2"></rect>
+                            <polyline stroke="#BBDBEC" stroke-width="2" points="80 12 77 20.8000002 74 12"></polyline>
+                        </g>
+                        <g transform="translate(4, 335)">
+                            <g>
+                                <use fill-opacity="0.1" fill="#526B78" fill-rule="evenodd" xlink:href="#path-11"></use>
+                                <rect stroke="#526B78" stroke-width="4" x="-2" y="-2" width="66" height="66" rx="3"></rect>
+                            </g>
+                            <text font-family="'Source Sans Pro', sans-serif" font-size="22" font-weight="500" fill="#FFFFFF">
+                                <tspan x="15.38" y="38">.cjs</tspan>
+                            </text>
+                        </g>
+                        <g transform="translate(38, 307)">
+                            <rect fill="#BBDBEC" x="0" y="22" width="6" height="2"></rect>
+                            <rect fill="#BBDBEC" x="2" y="6" width="2" height="16"></rect>
+                            <rect fill="#BBDBEC" transform="translate(4.704683, 4.704683) rotate(45) translate(-4.704683, -4.704683) " x="3.70468347" y="1.87968342" width="2" height="5.6500001"></rect>
+                            <rect fill="#BBDBEC" x="6" y="2" width="62" height="2"></rect>
+                            <polyline stroke="#BBDBEC" stroke-width="2" transform="translate(66.400000, 3) rotate(270) translate(-66.400000, -3) " points="69.4000001 -1.4000001 66.4000001 7.4000001 63.4000001 -1.4000001"></polyline>
+                        </g>
+                        <g transform="translate(26, 289)">
+                            <polyline stroke="#BBDBEC" stroke-width="2" points="6 30 3 38.8000002 0 30"></polyline>
+                            <rect fill="#BBDBEC" x="2" y="0" width="2" height="39"></rect>
+                            <rect fill="#BBDBEC" x="0" y="0" width="6" height="2"></rect>
+                        </g>
+                        <g transform="translate(110, 246.500000) scale(1, -1) translate(-190, -246.500000) translate(150, 236)">
+                            <rect fill="#BBDBEC" x="0" y="0" width="2" height="6"></rect>
+                            <rect fill="#BBDBEC" x="76" y="6" width="2" height="12"></rect>
+                            <rect fill="#BBDBEC" transform="translate(75.304690, 4.704683) rotate(-45) translate(-75.304690, -4.704683) " x="74.3046896" y="1.87968342" width="2" height="5.6500001"></rect>
+                            <rect fill="#BBDBEC" x="2" y="2" width="72" height="2"></rect>
+                            <polyline stroke="#BBDBEC" stroke-width="2" points="80 12 77 20.8000002 74 12"></polyline>
+                        </g>
+                        <g transform="translate(4, 223)">
+                            <g>
+                                <use fill-opacity="0.1" fill="#526B78" fill-rule="evenodd" xlink:href="#path-12"></use>
+                                <rect stroke="#526B78" stroke-width="4" x="-2" y="-2" width="66" height="66" rx="3"></rect>
+                            </g>
+                            <text font-family="'Source Sans Pro', sans-serif" font-size="22" font-weight="500" fill="#FFFFFF">
+                                <tspan x="10.947" y="38">.hbs</tspan>
+                            </text>
+                        </g>
+                        <g transform="translate(32, 177)">
+                            <polyline stroke="#BBDBEC" stroke-width="2" points="6 30 3 38.8000002 0 30"></polyline>
+                            <rect fill="#BBDBEC" x="2" y="0" width="2" height="39"></rect>
+                            <rect fill="#BBDBEC" x="0" y="0" width="6" height="2"></rect>
+                        </g>
+                        <g transform="translate(4, 111)">
+                            <g>
+                                <use fill-opacity="0.1" fill="#526B78" fill-rule="evenodd" xlink:href="#path-13"></use>
+                                <rect stroke="#526B78" stroke-width="4" x="-2" y="-2" width="66" height="66" rx="3"></rect>
+                            </g>
+                            <text font-family="'Source Sans Pro', sans-serif" font-size="22" font-weight="500" fill="#FFFFFF">
+                                <tspan x="20" y="38">.js</tspan>
+                            </text>
+                        </g>
+                    </g>
+                  </svg>
+              </div>
+              <aside class="notes">
+                webpack is a static module bundler for modern JavaScript applications. When webpack processes your application, it internally builds a dependency graph which maps every module your project needs and generates one or more bundles.
+              <aside class="notes">
+                webpack is a static module bundler for modern JavaScript applications. When webpack processes your application, it internally builds a dependency graph which maps every module your project needs and generates one or more bundles.
+              </aside>
+            </section>
+            <section>
+              <h3>What is a Module?</h3>
+              <blockquote class="my-5" cite="https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guide-783f7d7a5fcc" class="fragment fade-up" data-fragment-index="1">
+                &ldquo;Good authors divide their books into chapters and sections; good programmers divide their programs into modules.&rdquo;
+              </blockquote>
+              <p class="fragment fade-up small mb-4" data-fragment-index="2">Module benefits</p>
+              <ol>
+                <li class="fragment fade-up" data-fragment-index="2">Maintainability</li>
+                <li class="fragment fade-up" data-fragment-index="3">Namespacing</li>
+                <li class="fragment fade-up" data-fragment-index="4">Reusability</li>
+              </ol>
+              <aside class="notes">
+                While reading posts regarding webpack, modules, blah-blah, i found very cool description of modules. 
+                Good modules are highly self-contained with distinct functionality, allowing them to be shuffled, removed, or added as necessary, without disrupting the system as a whole.
+
+                There are a lot of benefits to using modules in favor of a sprawling, interdependent codebase. The most important ones, in my opinion, are:
+
+                1.  Updating a single module is much easier when the module is decoupled from other pieces of code.
+                2. Modules allow us to avoid namespace pollution by creating a private space for our variables, Sharing global variables between unrelated code is a big no-no in development.
+                3. Let’s be honest here: we’ve all copied code we previously wrote into new projects at one point or another. For example, let’s imagine you copied some utility methods you wrote from a previous project to your current project. 
+              </aside>
+            </section>
+            <section>
+              <h3>What is a webpack Module?</h3>
+            </section>
+            <section>
+              <div>
+                <h4>An <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#Syntax">ES2015 import</a> statement</h4>
+<pre class="code-highlight w-100 fragment" data-fragment-index="1">
+<span class="code-higlight fragment" data-fragment-index="1">import "./module-name";</span>
+<span class="code-higlight fragment" data-fragment-index="2">import "module-name";</span>
+<span class="code-higlight fragment" data-fragment-index="3">import defaultExport from "module-name";</span>
+<span class="code-higlight fragment" data-fragment-index="4">import jQuery from "jquery";</span>
+<span class="code-higlight fragment" data-fragment-index="5">import foo from "../../bar";</span>
+</pre>
+              </div>
+              <aside class="notes">
+                ES2015 import
+                In contrast to Node.js modules, webpack modules can express their dependencies in a variety of ways. A few examples are:
+                <strong>module-name</strong>
+                The module to import from. This is an example of absolute path name to the .js file containing the module.
+                <strong>module-name</strong>
+                This is an example of relative path name to the .js file containing the module. By contrast, a relative path starts from some given working directory, avoiding the need to provide the full absolute path (in this case - node_modules folder)
+                <strong>defaultExport</strong>
+                Name that will refer to the default export from the module.
+                <strong>Real example of default export</strong>
+                In this example, we are assigning a name for jQuery module. If you will use jQuery throught your module code, assing a name, otherwise - you can use 'unnamed' import example above.
+              </aside>
+            </section>
+            <section>
+              <h6>ES2015 import usage example</h6>
+              <div class="fragment fade-up" data-fragment-index="1">
+                <code class="small">bar.js</code>
+<pre class="code-highlight w-100 fragment" data-fragment-index="1">
+<span class="code-highlight fragment" data-fragment-index="1">export default function bar() {</span>
+  <span class="code-highlight fragment" data-fragment-index="2">console.log('Module `bar` exported');</span>
+<span class="code-highlight fragment" data-fragment-index="1">}</span>
+</pre>
+              </div>
+              <div class="fragment fade-up" data-fragment-index="3">
+            <code class="small">app.js</code>
+<pre class="code-highlight w-100">
+<span class="code-highlight fragment" data-fragment-index="5">import foo from './bar';</span>
+
+<span class="code-highlight fragment" data-fragment-index="6">foo();</span>
+<span class="code-highlight fragment" data-fragment-index="7">console.log('Module `bar` imported');</span>
+</pre>
+              </div>
+              <div class="fragment" data-fragment-index="8">
+                <h6>And result</h6>
+                <img src="https://scrstorage.s3.amazonaws.com/MKUniverset_2019-04-09_12-23-32.jpg" alt="">
+              </div>
+            </section>
+            <section>
+              <h6>A <a href="https://flaviocopes.com/commonjs/">CommonJS</a> require() statement</h6>
+              <div class="fragment fade-in" data-fragment-index="1">
+<pre class="code-highlight w-100">
+<span class="code-higlight fragment" data-fragment-index="1">const package = require('module-name')</span>
+<span class="code-higlight fragment" data-fragment-index="2">const { a, b, c } = require('./bar')</span>
+</pre>
+              </div>
+              <aside class="notes">
+                The CommonJS module specification is the standard used in Node.js for working with modules. Client-side JavaScript that runs in the browser uses another standard, called ES Modules
+
+                Modules are very cool, because they let you encapsulate all sorts of functionality, and expose this functionality to other JavaScript files, as libraries. They let you create clearly separate and reusable snippets of functionality, each testable on its own.
+
+                The huge npm ecosystem is built upon this CommonJS format.
+
+                The syntax to import a module is:
+              </aside>
+            </section>
+            <section>
+              <h6>CommonJS require() usage example</h6>
+              <div class="row">
+                <div class="col-6">
+                  <div class="fragment fade-up" data-fragment-index="1">
+                    <code class="small">bar.js</code>
+<pre class="code-highlight w-100">
+<span class="code-highlight fragment" data-fragment-index="1">exports.a = 1;</span>
+<span class="code-highlight fragment" data-fragment-index="1">exports.b = 2;</span>
+<span class="code-highlight fragment" data-fragment-index="2">exports.rtl = str =&gt; 
+[...str].reverse().join('');</span>
+<span class="code-highlight fragment" data-fragment-index="3">
+exports.default = log =&gt; {
+  console.log(log);
+};
+</span>
+</pre>
+                  </div>
+                  <div class="fragment fade-up" data-fragment-index="4">
+                <code class="small">app.js</code>
+<pre class="code-highlight w-100">
+<span class="code-highlight fragment" data-fragment-index="5">const {rtl} = require('./bar.js');</span>
+<span class="code-highlight fragment" data-fragment-index="6">const {a, b} = require('./bar.js');</span>
+<span class="code-highlight fragment" data-fragment-index="7">const bar = require('./bar.js');</span>
+<span class="code-highlight fragment" data-fragment-index="8">const log = require('./bar.js').default;</span>
+
+<span class="code-highlight fragment" data-fragment-index="9">console.log(rtl('test'));</span>
+<span class="code-highlight fragment" data-fragment-index="9">
+console.log({a,b});
+</span>
+<span class="code-highlight fragment" data-fragment-index="9">console.log(bar);</span>
+<span class="code-highlight fragment" data-fragment-index="9">log('Default export');</span>
+</pre>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="fragment" data-fragment-index="10">
+                    <h6>And result</h6>
+                    <img class="img-fluid w-100" src="https://scrstorage.s3.amazonaws.com/MKUniverset_2019-04-09_14-14-44.jpg" alt="">
+                  </div>
+                </div>
+              </div>
+              <aside class="notes">
+                there are few other methods, but for our workflow 2 is enough. If you want to learn more, try to learn webpack documentation, JS specs, ES6+ specs, etc. :D
+              </aside>
+            </section>
+            <section>
+              <h2>But... is that all??!!!🧐 <br> <span class="fragment fade-in text-danger" data-fragment-index="1">LOL, no!!!😁</span> <br> <span class="fragment" data-fragment-index="2">🤔🤔What else?🤔🤔</span></h2>
+              
+              <img width="900" class="fragment fade-up img-fluid d-block mx-auto border-0 bg-transparent shadow-none" src="https://d33wubrfki0l68.cloudfront.net/7a197cfe44548cc1a3f581152af70a3051e11671/78df8/img/babel.svg" alt="babel" data-fragment-index="3">
+            </section>
+            <section>
+              <h2>Babel🧐</h2>
+              <div class="row">
+                <div class="col-5">
+                  <img class="fragment fade-up img-fluid w-100 d-block border-0 bg-transparent shadow-none" src="https://i.kym-cdn.com/photos/images/newsfeed/000/173/576/Wat8.jpg?1315930535" alt="WAT" data-fragment-index="3">
+                </div>
+                <div class="col-7 text-left fragment fade-up">
+                  <h5><a href="https://babeljs.io">Babel</a> is a JavaScript compiler</h5>
+                  <ul class="small">
+                    <li>Transform syntax</li>
+                    <li>Polyfill features that are missing in your target environment</li>
+                    <li>Source code transformations (codemods)</li>
+                    <li>And more!</li>
+                  </ul>
+                  <pre><code class="hljs javascript" data-trim data-line-numbers="2,5-8">
+// Babel Input: ES2015 arrow function
+[1, 2, 3].map((n) => n + 1);
+
+// Babel Output: ES5 equivalent
+[1, 2, 3].map(function(n) {
+  return n + 1;
+});
+                  </code></pre>
+                </div>
+              </div>
+              <aside class="notes">
+                Babel is a toolchain that is mainly used to convert ECMAScript 2015+ code into a backwards compatible version of JavaScript in current and older browsers or environments. Here are the main things Babel can do for you:
+
+                In order to use Babel, we need to use the Babel Loader. Loaders are how Webpack can process content other than JavaScript. With Loaders we can get Webpack to process many types of files — CSS, Images, TypeScript and ES2015 code and so on.
+              </aside>
+            </section>
+            <section>
+              <h4>What we get from babel?</h4>
+              <div class="row">
+                <div class="col-6">
+                  <p class="small">Arrow function</p>
+                  <pre><code class="hljs" data-trim data-line-numbers="2,3,5-10">
+// Expression bodies
+var nums = evens.map((v, i) => v + i);
+
+// Statement bodies
+nums.forEach(v => {
+  if (v % 5 === 0)
+    fives.push(v);
+});
+                  </code></pre>
+                  <p class="small">Template Strings</p>
+                  <pre><code class="hljs" data-trim data-line-numbers="2,5,6,9-10">
+// Basic literal string creation
+`This is a pretty little template string.`
+
+// Multiline strings
+`In ES5 this is
+ not legal.`
+
+ // Interpolate variable bindings
+ var name = "Bob", time = "today";
+ `Hello ${name}, how are you ${time}?`
+                  </code></pre>
+                </div>
+                <div class="col-6">
+                  <p class="small">Promises</p>
+                  <pre><code class="hljs" data-trim data-line-numbers="1,3,4,6-12">
+const slider = new Promise(resolve => {
+  // checking, if content slider is loaded
+  this.holder.on('init', slick => {
+    this.carousel = slick;
+    // resolving promise
+    resolve();
+  });
+});
+
+slider.then(() => {
+  this.videoInit();
+});
+                  </code></pre>
+                  <p class="small">Async/await</p>
+                  <pre><code class="hljs" data-trim data-line-numbers="1-3">
+const initialState = async () => {
+  await slider;
+};
+                  </code></pre>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="row">
+                <div class="col-6">
+                  <p class="small">Default + Rest + Spread</p>
+                  <pre><code class="hljs" data-trim data-line-numbers="1,3-5">
+function f(x, y=12) {
+  // y is 12 if not passed (or passed as undefined)
+  return x + y;
+}
+f(3) == 15
+                  </code></pre>
+                </div>
+                <div class="col-6">
+                  <p class="small">Map + Set</p>
+                  <pre><code class="hljs" data-trim data-line-numbers="2-4,7-12">
+// Sets
+var s = new Set();
+s.add("hello").add("goodbye").add("hello");
+s.has("hello") === true;
+
+// Maps
+var m = new Map();
+m.set("hello", 42);
+m.set(s, 34);
+m.get(s) == 34;
+                  </code></pre>
+                </div>
+              </div>
+              <h6 class="text-success"><a href="https://babeljs.io/docs/en/learn/">and more</a></h6>
+            </section>
+          </section>
+          <section>
+            <h2>More to come</h2>
+            <ul class="text-left">
+              <li>Update to GULP 4</li>
+              <li>More frameworks</li>
+              <li>HTML template engines</li>
+              <li>Icomoon font generation</li>
+              <li>etc...</li>
+            </ul>
+          </section>
+      </div>
+    </div>
+
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        hash: true,
+        width: "100%",
+        height: "100%",
+        // minScale: 1,
+        // maxScale: 1,
+        // Push each slide change to the browser history. Implies `hash: true`
+        history: true,
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: () => {
+            [].forEach.call( document.querySelectorAll( '.code-highlight'  ), function( v, i ) {
+              hljs.highlightBlock(v);
+            });
+          } }
+        ]
+      });
+      
+    </script>
+  </body>
+</html>

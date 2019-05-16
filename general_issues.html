@@ -1,0 +1,1158 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>General issues</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai.css">
+
+    <style>
+      html {
+        font-size: 10px;
+      }
+      .reveal{
+        font-size: 2.5em;
+      }
+      [hidden] {
+        display: block !important;
+      }
+      .shadow-none {
+        box-shadow: none !important;
+      }
+
+      .reveal pre code {
+        max-height: 600px;
+      }
+      pre {
+        width: 100%;
+      }
+    </style>
+
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>General issues</h1>
+        </section>
+        <section>
+          <section>
+            <h2>Beginning of development</h2>
+          </section>
+          <section>
+            <div class="mx-2">
+              <i class="lnr lnr-magnifier mr-2"></i>
+              Design research
+            </div>
+            <div class="my-5 h1">
+              <i class="lnr lnr-arrow-down mx-2"></i>
+            </div>
+            <div class="row text-left">
+              <div class="col-5">
+                <div>
+                  <i class="lnr lnr-eye mr-2"></i>
+                  Gather info about the common things
+                </div>
+                <div class="mx-5">
+                  <div><i class="lnr lnr-text-size"></i> Typography</div>
+                  <div><i class="lnr lnr-drop"></i> Colors</div>
+                  <div><i class="lnr lnr-layers"></i> Layout types</div>
+                </div>
+              </div>
+              <div class="col-2 h1 text-center d-flex align-items-center justify-content-center">
+                <i class="lnr lnr-plus-circle mx-2"></i>
+              </div>
+              <div class="col-5">
+                <div>
+                  <i class="lnr lnr-star mr-2"></i>
+                Gather info about unique things
+                </div>
+                <div class="mx-5">
+                  <div><i class="lnr lnr-star-half"></i> Extend</div>
+                  <div><i class="lnr lnr-cog"></i> Modify</div>
+                  <div><i class="lnr lnr-star-empty"></i> Remove</div>
+                </div>
+              </div>
+            </div>
+            <div class="my-5 h1">
+              <i class="lnr lnr-arrow-down"></i>
+            </div>
+            <h3 class="text-success"><i class="lnr lnr-rocket mr-2"></i>Idea of development process (architecture)</h3>
+          </section>
+          <section>
+            <h2>Question to ask</h2>
+<pre><code class="hljs javascript" data-trim data-line-numbers>
+async function gatherQuestionsForPM() {
+  let goodQuestions = [];
+  let questions = [
+    'this is fade carousel or slide?',
+    'this is accordion or open-close?',
+    'this part is out of grid, can we adjust design a little bit?',
+    'this heading is black in desktop design, but red in mobile. Which one is correct?',
+  ]
+  const questionTypes = [
+    'blocker', 'increase time', 'decrease time' , 'not compatible',
+    'out of requirements', 'not understandable at all'
+  ]
+
+  let checkQuestion = (question) => {
+    if (question.indexOf(questionTypes) !== -1) {
+      return question;
+    }
+    return false;
+  }
+
+  await questions.map(question => {
+    goodQuestions.push(checkQuestion(question));
+  })
+
+  return goodQuestions;
+}
+
+console.log(gatherQuestionsToPM); // [false, false, false, false];
+</code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Coding process</h2>
+          </section>
+          <section>
+            <h2>Naming convention</h2>
+            <div class="row">
+              <div class="col">
+                <i class="lnr lnr-thumbs-down text-danger"></i>
+<pre><code class="hljs scss">
+.hero-section {
+  &-style01 {}
+  &-style02 {}
+  &-style03 {}
+}
+</code></pre>
+              </div>
+              <div class="col">
+                <i class="lnr lnr-thumbs-up text-success"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+.hero-section {
+  &-primary {}
+  &-small {}
+  &-tall {}
+  &-large {}
+  &-full-height {}
+  &-no-decoration {}
+}
+</code></pre>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <i class="lnr lnr-thumbs-down text-danger"></i>
+<pre><code class="hljs scss">
+// font name !== variable name
+$font-family-roboto: 'Roboto';
+$font-family-neue: 'Neue Sans Pro';
+$font-family-awful: 'Custom awful font';
+
+// and if i want to change font?
+$font-family-roboto: 'Sans OpenSans'; // hm, wut?
+
+</code></pre>
+              </div>
+              <div class="col">
+                <i class="lnr lnr-thumbs-up text-success"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+$font-sans-serif: 'Roboto';
+$font-sans-serif-secondary: 'Neue Sans Pro';
+$font-sans-serif-tertiary: 'Custom awful font';
+
+// is the same variables IF
+$font-sans-serif: 'Titillium';
+$font-sans-serif-secondary: 'Go Pro Cam';
+$font-sans-serif-tertiary: 'Super Duper Awesome font';
+
+// the logic is the same, font - is a difference
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>SCSS code splitting</h2>
+            <div class="row">
+                  <div class="col-6">
+                    <i class="lnr lnr-thumbs-down text-danger"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// _common.scss
+
+.btn {}
+h1-h6 {}
+* {}
+.common-block {}
+.site-section {}
+.hero-section {}
+.form-element {}
+.contact-section {}
+.contact-form {}
+
+</code></pre>
+                  </div>
+                  <div class="col-6">
+                    <i class="lnr lnr-thumbs-up text-success"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// _common.scss
+
+table {}
+.two-columns {}
+.site-section {}
+.common-block {}
+
+// components/_buttons.scss
+.btn {}
+
+// components/_forms.scss
+.form-element {}
+.contact-form {}
+
+// layout||components/_hero-section.scss
+.hero-section {}
+
+// layout||components/_contact-section.scss
+.contact-section {}
+
+// components/_typography.scss
+h1-h6 {}
+a {}
+
+// no place for this 💩💩💩💩💩, only for box-sizing
+* {}
+
+</code></pre>
+                  </div>
+                </div>
+          </section>
+          <section>
+            <h2>SCSS code issues</h2>
+          </section>
+          <section>
+            <h3>Too deep and specific inheritance</h3>
+            <div class="row">
+              <div class="col">
+                <i class="lnr lnr-thumbs-down text-danger"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+.block {
+  .holder {
+    .container {
+      h2 {
+        a {}
+      }
+    }
+  }
+}
+</code></pre>
+              </div>
+              <div class="col">
+                <i class="lnr lnr-thumbs-up text-success"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+.block {
+  .holder {
+  }
+  .container {
+  }
+  h2 {
+    a {}
+  }
+}
+</code></pre>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <i class="lnr lnr-thumbs-down text-danger"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+.header {
+  .nav {
+    > li {
+      > a {}
+      > ul {
+        >li {
+          a {}
+        }
+      }
+    }
+  }
+}
+</code></pre>
+              </div>
+              <div class="col">
+                <i class="lnr lnr-thumbs-up text-success"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+.nav {
+  a {} // some general styles
+  li {} // some general styles
+  ul {} // some general styles
+  > li {
+    > a {}
+    > ul {
+      > li {}
+      a {}
+    }
+  }
+}
+
+// if possible - better to use more classes for inner ULs
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3>Typography shorthand</h3>
+            <div class="row">
+              <div class="col-6">
+                <i class="lnr lnr-thumbs-down text-danger"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji'; // bootstrap default
+
+.block {
+  font: 500 12px/24px $font-family;
+
+  .inner {
+    font: 700 14/18px $font-family;
+  }
+}
+</code></pre>
+              </div>
+              <div class="col-6">
+                <i class="lnr lnr-thumbs-down text-danger"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// generated CSS
+
+.block {
+  font: 500 12px/24px -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji';
+}
+
+.block .inner {
+  font: 700 14px/18px -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji';
+}
+
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3>Typography: better</h3>
+            <div class="row">
+              <div class="col-6">
+                <i class="lnr lnr-thumbs-up text-success"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji'; // bootstrap default
+
+.block {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 24px;
+  font-family: $font-family;
+
+  .inner {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+</code></pre>
+              </div>
+              <div class="col-6">
+                <i class="lnr lnr-thumbs-up text-success"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// generated CSS
+
+.block {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 24px;
+}
+
+.block .inner {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3>Typography: best</h3>
+            <div class="row">
+              <div class="col-6">
+                <i class="lnr lnr-thumbs-up text-success"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji'; // bootstrap default
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+$font-size-base: 12px;
+$font-size-md: 14px;
+$line-height-base: 2; // 24px / 12px
+$line-height-sm: 1.29; // 18px / 14px
+
+.block {
+  font-weight: $font-weight-medium;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  font-family: $font-family;
+
+  .inner {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-md;
+    line-height: 1.29; // 18px / 14px
+  }
+}
+</code></pre>
+              </div>
+              <div class="col-6">
+                <i class="lnr lnr-thumbs-up text-success"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// generated CSS
+
+.block {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 2;
+}
+
+.block .inner {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+}
+
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3>Typography: using SASS power</h3>
+            <div class="row">
+              <div class="col-6">
+                <i class="lnr lnr-thumbs-up text-success"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji'; // bootstrap default
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+$font-size-base: 12px;
+$font-size-md: 14px;
+$line-height-base: 2; // 24px / 12px
+$line-height-sm: 1.29; // 18px / 14px
+
+.block {
+  font: {
+    weight: $font-weight-medium;
+    size: $font-size-base;
+    family: $font-family;
+  }
+  line-height: $line-height-base;
+  
+
+  .inner {
+    font: {
+      weight: $font-weight-bold;
+      size: $font-size-md;
+    }
+    line-height: 1.29; // 18px / 14px
+  }
+}
+</code></pre>
+              </div>
+              <div class="col-6">
+                <i class="lnr lnr-thumbs-up text-success"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// generated CSS
+
+.block {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 2;
+}
+
+.block .inner {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+}
+
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3>Animations</h3>
+            <div class="row">
+              <div class="col-6">
+                <i class="lnr lnr-thumbs-down text-danger"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+.block {
+  margin: 20px;
+  padding: 5px;
+  opacity: 0;
+  transform: translate(-15px, 0);
+  transition: all .3s ease;
+}
+</code></pre>
+              <i class="lnr lnr-thumbs-up text-success"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+.block {
+  margin: 20px;
+  padding: 5px;
+  opacity: 0;
+  transform: translate(-15px, 0);
+  transition: transform .3s ease, opacity .3s ease;
+}
+</code></pre>
+              </div>
+              <div class="col-6">
+                <h4>Why this is so bad?</h4>
+<pre><code class="hljs javascript">
+const cssStyles = [{
+  margin: {
+    canAnimate: true,
+    props: {
+      top: function(){}, // some function that return to us result
+      right: function(){}, // some function that return to us result
+      bottom: function(){}, // some function that return to us result
+      left: function(){}, // some function that return to us result
+    },
+  },
+  ...
+}]; // array of objects with CSS styles
+
+// Algorythm of animation on event
+
+cssStyles.forEach(style => {
+  // going throught ALL THE CSS STYLES that are in array
+  // checking if this style is able to animate?
+  // true or false
+  // if true, checking all the inner props that it has
+  // lots of styles has props, so - lots of additional inner loops
+  // hope this is going only once and then just stored somewhere.
+  // but the impact is HUGE
+})
+
+</code></pre>
+              </div>
+            </div>
+            <aside class="notes">
+              When we animate an element, the browser has to re-evaluate the page — frame by frame — to determine if and how the element has affected the flow of nearby elements and the overall page, then recalculate the positions and geometries of those elements. This process is called reflow.
+            </aside>
+            <a href="https://blog.teamtreehouse.com/create-smoother-animations-transitions-browser">Very good article to read which styles (only) should be used for animation</a>
+          </section>
+          <section>
+            <h2>Some general comments</h2>
+            <div class="row justify-content-center">
+              <div class="col-8">
+                <ol class="text-left">
+                  <li><i class="lnr lnr-cross text-danger"></i> Mixed MF/DF approaches</li>
+                  <li><i class="lnr lnr-cross text-danger"></i> Vendor preffixes in SCSS for commonly used styles</li>
+                  <li><i class="lnr lnr-cross text-danger"></i> ID's for styles.</li>
+                  <li><i class="lnr lnr-cross text-danger"></i> 'Table like codding', table styles, floats for layout.</li>
+                  <li><i class="lnr lnr-cross text-danger"></i> Fixed height for sections with dynamic content</li>
+                </ol>
+              </div>
+            </div>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Some features i would like to share </h2>
+          </section>
+          <section>
+            <h2>SCSS loops, maps, maps API</h2>
+            <div class="row">
+              <div class="col-6">
+                <h3>SCSS loops and conditions</h3>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// @if , @else
+@if ($condition) {
+  // result
+} @else {
+  // other result (optional)
+}
+
+// @each
+$each $key, $value in $map {
+  // $key - key of map
+  // $value - value
+  // dont forget about #{$variable} inside brackets
+}
+
+// @for
+@for $i from 1 through $length {
+  // some code based on counter
+  //perfect for some type of increments of repeatable components
+}
+</code></pre>
+              </div>
+              <div class="col-6">
+                <h3>SCSS maps</h3>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+$font-sizes: (
+  'small':  0.8rem,
+  'base':   1rem,
+  'medium': 1.2rem,
+  'large':  1.6rem
+);
+
+// Returns the value in $map associated with $key.
+$map-get($font-sizes, 'base'); // 1rem
+$map-get($font-sizes, 'xs'); // null
+
+// Returns a comma-separated list of all the keys in $map.
+$map-keys($font-sizes); // small, base, medium, large
+
+// Returns a comma-separated list of all the values in $map.
+$map-values($font-sizes); // 0.8rem, 1rem, 1.2rem, 1.6rem
+</code></pre>
+<a href="https://sass-lang.com/documentation/functions/map">Article to read about maps</a>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>SCSS maps + loops use cases</h2>
+            <div class="row">
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// _typography.scss
+@each $name, $value in $font-sizes {
+  .text-size-#{$name} {
+    font-size: $value; // .text-size-base == font-size: 1rem;
+  }
+}
+
+// _common.scss
+@each $name, $value in $alpha {
+  .alpha-#{$name} {
+    opacity: $value; // .alpha-10 == opacity: 0.1
+  }
+}
+
+// _mixins.scss
+@mixin btn($size..., $states-only:false) {
+  ... // some styles
+  @if ($states-only == false) {
+    background: map-get($colors, 'primary');
+  }
+  @if ($background == map-get($colors, 'light')) {
+    color: $dark;
+  } @else {
+    color: $light;
+  }
+}
+
+// _buttons.scss
+@each $name, $value in $colors {
+  .btn-#{$name} {
+    @include btn(..., true); // $states-only = true;
+    // as result - button with default bg, but with unique theme on events
+  }
+}
+</code></pre>
+              </div>
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// _variables.scss
+
+$font-sizes: (
+  'small':  0.8rem,
+  'base':   1rem,
+  'medium': 1.2rem,
+  'large':  1.6rem
+);
+
+$colors: (
+  'light': #fff,
+  'dark': #000,
+  'primary': #f00
+)
+
+$alpha: (
+  '10': 0.1,
+  '20': 0.2,
+  '50': 0.5,
+)
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>icomoon font with variables</h2>
+          </section>
+          <section>
+            <h3>To make perfect icons that are similar to each other, extendable, and easy to use, follow those steps:</h3>
+            <div class="row">
+              <div class="col-6">
+                <ol>
+                  <li>
+                    <h4>Ensure that all icons are the same in terms of width/height</h4>
+                    <p>After loading icons, open each icon and use context menu: <br>
+                      <strong class="text-success">Canvas/Alignment <i class="lnr lnr-arrow-right"></i></strong>
+                      <strong class="text-success">Square canvas <i class="lnr lnr-arrow-right"></i></strong>
+                      <strong class="text-success">Align to center vertically <i class="lnr lnr-arrow-right"></i></strong>
+                      <strong class="text-success">Align to center horizontaly</strong>
+                    </p>
+                    <p>Now all icons are in the same format. Much easier to control in CSS using font-size</p>
+                  </li>
+                  <li>
+                    <h4>Generate icons with SCSS variables</h4>
+                    <strong class="text-success">Generate font <i class="lnr lnr-arrow-right"></i></strong>
+                    <strong class="text-success">Gear button right near "Download" <i class="lnr lnr-arrow-right"></i></strong>
+                    <strong class="text-success">Set settings like this  <i class="lnr lnr-arrow-right"></i></strong>
+                    <strong class="text-success">Download</strong>
+                  </li>
+                </ol>
+              </div>
+              <div class="col-6">
+                <img src="https://scrstorage.s3.amazonaws.com/IcoMoon_App_-_Icon_Font_SVG_PDF__PNG_Generator_2019-05-07_21-22-50.jpg" alt="" width="500">
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>What do we have in result?</h2>
+            <div class="row">
+              <div class="col-3">
+                <h4>Files that are generated</h4>
+                <img src="https://scrstorage.s3.amazonaws.com/icomoon_2019-05-07_21-17-05.jpg" alt="">
+              </div>
+              <div class="col-4">
+                <h4>Variables file</h4>
+                <img src="https://scrstorage.s3.amazonaws.com/variables.scss__assets_templates_2019-05-07_21-17-49.jpg" alt="">
+                <p><i>variable name == icon name in Icomoon</i></p>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+.block {
+  &:after {
+    @extend %icon;
+    // much better, but more to change 😙
+    @include icomoon-styles;
+
+    content: $icon-search;
+  }
+}
+</code></pre>
+              </div>
+              <div class="col-5">
+                <h4>Font file</h4>
+                <img src="https://scrstorage.s3.amazonaws.com/style.scss__assets_templates_2019-05-07_21-22-10.jpg" alt="">
+
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Prefered structure for files</h2>
+            <div class="row">
+              <div class="col-6">
+                <h5>put inside vendors folder</h5>
+                <img src="https://scrstorage.s3.amazonaws.com/icomoon_2019-05-07_21-32-26.jpg" alt="">
+              </div>
+              <div class="col-6">
+                <h5>Include in main.scss file</h5>
+                <img src="https://scrstorage.s3.amazonaws.com/main.scss__assets_templates_2019-05-07_21-35-25.jpg" alt="">
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2><a href="http://razorltd.github.io/sasscolourfunctioncalculator/" class="text-success">SASS color calculator (resource)</a></h2>
+            <div class="row">
+              <div class="col-6">
+                <h3>Project use case</h3>
+                <p>Design for component with BASE color and modifiers of this BASE color on events/states and MORE...</p>
+                <img src="https://scrstorage.s3.amazonaws.com/button_design_all_states_-_Poisk_v_Google_2019-05-08_12-51-41.jpg" alt="">
+              </div>
+              <div class="col-6">
+                <h3>So, benefit?</h3>
+                <p>One BASE color - a lot of functions</p>
+<pre><code class="hljs scss">
+@mixin button-style($base-color) {
+  background-color: $base-color;
+
+  // calculated colors for states
+  &:hover {
+    background-color: lighten(desaturate(adjust-hue($base-color, 4), 5.43), 2.94);
+  }
+  &:focus {
+    background-color: darken(desaturate($base-color, 11.69), 3.33);
+  }
+  &:active {
+    background-color: lighten(desaturate($base-color, 3.92), 8.24);
+  }
+  &:disabled {
+    // this could be the same across all the buttons (depends)
+    background-color: $btn-disabled-bg;
+  }
+}
+
+.button {
+  @include button-style($base-color);
+}
+.button--red {
+  // pattern will be the same
+  // only ONE variable is necessary to make 'all-states' button
+  @include button-style(red);
+}
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>And this is how difference looks like</h2>
+            <div class="row">
+              <div class="col-6">
+                <h3>Before </h3>
+<pre><code class="hljs scss">
+$button-primary: #414BFB;
+$button-primary-hover: #747D8E;
+$button-primary-active: #3A4254;
+$button-primary-focus: #414BFB;
+$button-primary-disabled: #EFEEEE;
+// and if MORE buttons - repeat...
+</code></pre>
+              <small>(in perfect world btw..), in most cases no variables at all 💩💩💩💩💩💩💩💩💩</small>
+              </div>
+              <div class="col-6">
+                <h3>After: using functions</h3>
+<pre><code class="hljs scss">
+$button-primary: #414BFB;
+....
+// unique color for button - default state
+// then calculate functions based on FIRST button like a basis
+// repear throught loop using mixin
+// profit!
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>SVG decorations</h2>
+            <div class="row">
+              <div class="col-6">
+                <h4>Custom hover/sections decorations</h4>
+                <img class="d-block" src="https://scrstorage.s3.amazonaws.com/International_School_of_Billund_2019-05-08_13-19-55.jpg" alt="">
+                <img class="d-block" src="https://scrstorage.s3.amazonaws.com/S-KAI-Hafencity_2019-05-08_13-23-56.jpg" alt="">
+              </div>
+              <div class="col-6">
+                <h4>That should change color depending on the theme/states etc.</h4>
+                <img class="d-block" src="https://scrstorage.s3.amazonaws.com/International_School_of_Billund_2019-05-08_13-51-41.jpg" alt="">
+                <img class="d-block" src="https://scrstorage.s3.amazonaws.com/S-KAI-Hafencity_2019-05-08_13-25-51.jpg" alt="">
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>So, what the trick?</h2>
+            <div class="row">
+              <div class="col-4 text-left">
+                <p>This is single SVG,that used not like image, even not from "images" folder.</p>
+                <p>This is SVG code converted to the Crossbrowser SVG code to use as background image using CSS. </p>
+                <p>And, i can control "fill" style of this to change colors 😙</p>
+              </div>
+              <div class="col-8">
+                <div class="row">
+                  <div class="col-6">
+                    <img src="https://scrstorage.s3.amazonaws.com/DevTools_-_fileUsersalekseyDesktopS-KAI-Hafencitymarkupdistindex.html_2019-05-08_13-55-39.jpg" alt="">
+                  </div>
+                  <div class="col-6">
+                    <img src="https://scrstorage.s3.amazonaws.com/DevTools_-_fileUsersalekseyDesktopInternationalSchoolOfBillundmarkupdistsubpage.html_2019-05-08_13-57-46.jpg" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>How to use it?</h2>
+            <h3>First part: converter</h3>
+            <div class="row">
+              <div class="col-6">
+                <iframe style="height: 450px;" class="d-block w-100" src="https://codepen.io/jakob-e/pen/doMoML" frameborder="0"></iframe>
+                <a href="https://codepen.io/jakob-e/pen/doMoML">Source(dont forget to fork it, to keep such a great thing)</a>
+              </div>
+              <div class="col-6">
+                <h3>Usage</h3>
+                <ol class="text-left">
+                  <li>We need SVG code for the decoration. </li>
+                  <li>Copy it, remove unnecessary thing ike comments, etc. The main thing is viewBox, it should be for sure</li>
+                  <li>Paste it into converter</li>
+                  <li>Copy modified SVG code</li>
+                </ol>
+                <p><span class="text-danger text-uppercase">important❗️</span> dont forget about the preserveAspectRatio parameter of SVG. Read about it, learn how it works, because this is for responsiveness of you SVG and it depends on situation.</p>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Second part: usage in SCSS</h2>
+            <div class="row">
+              <div class="col-6">
+                <h3>What we have after convertation?</h3>
+<pre><code class="hljs scss" data-trim data-line-numbers="3">
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 111 3' 
+xmlns='http://www.w3.org/2000/svg' %3E %3Cpath 
+fill='%23000000' 
+d='M0.00149794412,2.01611576 L0.240355667,0.0331888245 C5.57226436,
+0.675455772 15.1439284,0.998625514 28.9275479,0.998625514 C31.788709,
+0.998625514 35.3477598,0.942177596 40.6216642,0.821774486 C42.9189312,
+0.769328888 53.6808346,0.503865103 56.768589,0.432145177 C64.4749966,
+0.253129151 71.2703733,0.121965419 78.3298445,0.0261145493 C85.1000195,
+-0.0658100685 95.9861646,0.0849790722 110.99495,0.478277174 L110.942628,
+2.47484945 C95.958359,2.08219499 85.0942501,1.93171012 78.3569538,
+2.02318419 C71.3045919,2.11894143 64.5154118,2.24998229 56.8149609,
+2.42885788 C53.7292721,2.50053685 42.9668303,2.76601234 40.6672403,
+2.8185106 C35.3792108,2.93923553 31.8076907,2.99588239 28.9275421,
+2.99588239 C15.0680364,2.99588239 5.43527855,2.67065298 0.00149209278,
+2.01610991 L0.00149794412,2.01611576 Z'%3E%3C/path%3E %3C/svg%3E ");
+</code></pre>
+<pre><code class="hljs scss" data-trim data-line-numbers="2">
+// %23 === # in encoded Base64 crossbrowser format
+fill='%23000000' === fill='#000000'
+</code></pre>
+              </div>
+              <div class="col-6 text-left">
+                <h4 class="fragment fade-in">🤔 How to handle this in the best usable and extendable way? 🤔</h4>
+                <p class="fragment fade-in"><span class="text-success mr-2">BRAIN</span> Mixin?</p>
+                <p class="fragment fade-in"><span class="text-success mr-2">HOOMAN</span> 🧐 AND PASS COLOR. YEAH, perfect!!!👏</p>
+<pre class="mx-0 fragment fade-in"><code class="hljs scss" data-trim data-line-numbers>
+@mixin svg-background($color) {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 111 3' %3E %3Cpath 
+  fill='#{$color}' d='....'%3E%3C/path%3E %3C/svg%3E ");
+}
+.my-awesome-block {
+  @include svg-background(#f00);
+}
+</code></pre>
+              <p class="fragment fade-in"><span class="text-success mr-2">HOOMAN</span> Hey, brain! Didn't work 😢</p>
+              <p class="fragment fade-in"><span class="text-success mr-2">BRAIN</span> 🧐 Encoding HEX to encoded Base64?</p>
+              <p class="fragment fade-in"><span class="text-success mr-2">HOOMAN</span> 🧐 Oh, LUL, ..i. . Thx!👏</p>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Second part: usage in SCSS</h2>
+            <h3>Episode 2</h3>
+            <div class="row">
+              <div class="col-6">
+                <h3>What we have after convertation?</h3>
+<pre><code class="hljs scss" data-trim data-line-numbers="3">
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 111 3' 
+xmlns='http://www.w3.org/2000/svg' %3E %3Cpath 
+fill='%23000000' 
+d='M0.00149794412,2.01611576 L0.240355667,0.0331888245 C5.57226436,
+0.675455772 15.1439284,0.998625514 28.9275479,0.998625514 C31.788709,
+0.998625514 35.3477598,0.942177596 40.6216642,0.821774486 C42.9189312,
+0.769328888 53.6808346,0.503865103 56.768589,0.432145177 C64.4749966,
+0.253129151 71.2703733,0.121965419 78.3298445,0.0261145493 C85.1000195,
+-0.0658100685 95.9861646,0.0849790722 110.99495,0.478277174 L110.942628,
+2.47484945 C95.958359,2.08219499 85.0942501,1.93171012 78.3569538,
+2.02318419 C71.3045919,2.11894143 64.5154118,2.24998229 56.8149609,
+2.42885788 C53.7292721,2.50053685 42.9668303,2.76601234 40.6672403,
+2.8185106 C35.3792108,2.93923553 31.8076907,2.99588239 28.9275421,
+2.99588239 C15.0680364,2.99588239 5.43527855,2.67065298 0.00149209278,
+2.01610991 L0.00149794412,2.01611576 Z'%3E%3C/path%3E %3C/svg%3E ");
+</code></pre>
+<pre><code class="hljs scss" data-trim data-line-numbers="2">
+// %23 === # in encoded Base64 crossbrowser format
+fill='%23000000' === fill='#000000'
+</code></pre>
+              </div>
+              <div class="col-6 text-left">
+                <p><span class="text-success mr-2">HOOMAN</span> SUP, brain! Check this out! 😎</p>
+<pre class="mx-0"><code class="hljs scss" data-trim data-line-numbers="1-3, 6">
+@function url-friendly-color($hex-bg-color) {
+  @return '%23' + str-slice('#{$hex-bg-color}', 2, -1);
+}
+@mixin svg-background($color) {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 111 3' %3E %3Cpath 
+  fill='#{url-friendly-color($color)}' d='....'%3E%3C/path%3E %3C/svg%3E ");
+}
+.my-awesome-block {
+  @include svg-background(#f00);
+}
+</code></pre>
+                <p><span class="text-success mr-2">BRAIN</span>👏👏👏👏👏👏👏</p>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Resize-active class usage</h2>
+            <div class="row">
+              <div class="col-6">
+                <i class="text-danger lnr lnr-thumbs-down"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers="1-5">
+.resize-active * {
+  transition: none !important;
+}
+</code></pre>
+              </div>
+              <div class="col-6">
+                <i class="text-success lnr lnr-thumbs-up"></i>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+.block {
+  .resize-active & {
+    transition: none !important;
+  }
+}
+</code></pre>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+@mixin no-resize-transition {
+  .resize-active & {
+    transition: none !important;
+  }
+}
+.block {
+  @include no-resize-transition;
+}
+</code></pre>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+/// Make a context based selector a little more friendly
+/// @author Hugo Giraudel
+/// @param {String} $context
+@mixin when-inside($context) {
+  #{$context} & {
+    @content;
+  }
+}
+.block {
+  @include when-inside(.resize-active) {
+    transition: none !important;
+  }
+}
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Resize active: JS part</h2>
+            <p>You dont need burger menu plugin for this function. You can extract this function out of plugin and use it like utility</p>
+<pre><code class="hljs javascript" data-trim data-line-numbers>
+jQuery(function() {
+  initResizeHandler();
+});
+
+function initResizeHandler() {
+  var win = $(window),
+    doc = $('html'),
+    resizeClass = 'resize-active';
+
+  var activateResizeHandler = function() {
+    var flag, timer;
+    var removeClassHandler = function() {
+      flag = false;
+      doc.removeClass(resizeClass);
+    };
+    var resizeHandler = function() {
+      if (!flag) {
+        flag = true;
+        doc.addClass(resizeClass);
+      }
+      clearTimeout(timer);
+      timer = setTimeout(removeClassHandler, 500);
+    };
+    win.on('resize orientationchange', resizeHandler);
+  };
+
+  activateResizeHandler();
+}
+</code></pre>
+          </section>
+          <section>
+            <h2>Some additional things</h2>
+            <ol>
+              <li>Only flex for footer at bottom (not when IE9 is requirement ofc). <a href="http://alexriz.github.io/resdes/">Useful site for common layouts using flex</a> . Check IE beforetaking code from this site, it was a little buggy in. the past, maybe fixed for now</li>
+              <li>Vieport based units for development. Read more articles about this, when they are useful, process of development, behavior on resize etc.</li>
+            </ol>
+          </section>
+        </section>
+        <section>
+            <h1>Thanks.</h1>
+          </section>
+      </div>
+    </div>
+
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        hash: true,
+        width: "100%",
+        height: "100%",
+        // minScale: 1,
+        // maxScale: 1,
+        // Push each slide change to the browser history. Implies `hash: true`
+        history: true,
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: () => {
+            [].forEach.call( document.querySelectorAll( '.code-highlight'  ), function( v, i ) {
+              hljs.highlightBlock(v);
+            });
+          } }
+        ]
+      });
+      
+    </script>
+  </body>
+</html>

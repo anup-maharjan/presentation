@@ -1,0 +1,1270 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Bootstrap 4</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai.css">
+
+    <style>
+      html {
+        font-size: 10px;
+      }
+      .reveal{
+        font-size: 3em;
+      }
+      [hidden] {
+        display: block !important;
+      }
+      .shadow-none {
+        box-shadow: none !important;
+      }
+      pre {
+        width: 100%;
+      }
+    </style>
+
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>HOW TO: Frameworks</h1>
+        </section>
+        <section>
+          <h3>For what they are developed? what problem do they solve</h3>
+          <p>Frameworks for the rescue!</p>
+          <p>Creating consistent, and effective CSS can be quite a lot of work. There are so many things to consider like responsiveness, accessibility, and structure. This is exactly why CSS Frameworks exist, to take that routine off of you!</p>
+          <p>They are pre-tested, crossbrowser, documented and worldwide usable.</p>
+          <p>To summarize: <strong class="text-danger">there’s no need to reinvent the wheel.</strong></p>
+        </section>
+        <section>
+          <section>
+            <h3>Main requirement</h3>
+            <div class="fragment">
+              <p>Change the source, not the result!</p>
+              <div class="row mb-5">
+                <div class="col-6">
+                  <pre class="m-0"><code class="hljs scss" data-trim data-line-numbers>
+.btn {
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 21px; // NO-NO-NO PLEASE!
+  padding: 9px 10px;
+  // ...
+}
+                  </code></pre>
+                </div>
+                <div class="col-6">
+                  <pre class="m-0"><code class="hljs scss" data-trim data-line-numbers>
+.btn {
+  border-radius: $btn-border-radius;
+  font-size: $btn-font-size;
+  line-height: $btn-line-height;
+  padding: $btn-padding-y $btn-padding-x;
+  // ...
+}
+                  </code></pre>
+                </div>
+              </div>
+            </div>
+            <div class="fragment">
+              <h6>Better and correct!</h6>
+              <div class="row">
+                <div class="col-6">
+                  <pre class="m-0"><code class="hljs scss" data-trim data-line-numbers>
+// _bootstrap-custom.scss
+$btn-border-radius: 0.25rem;
+$btn-font-size: 0.875rem;
+$btn-line-height: 1.5;
+$btn-padding-y: 0.5625rem;
+$btn-padding-x: 0.625rem;
+                    </code></pre>
+                </div>
+                <div class="col-6">
+                  <pre class="m-0"><code class="hljs scss" data-trim data-line-numbers>
+.btn {
+// nothing to add, everything in variables
+}
+                    </code></pre>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>How to understand: </h2>
+            <h3>
+              what to change? <br>
+              where to find? <br>
+              what is that weird thing and how to change it?
+            </h3>
+          </section>
+          <section>
+            <ol>
+              <li><i class="text-success lnr lnr-book mr-3"></i>Read the documentation</li>
+              <li class="fragment"><i class="text-success lnr lnr-eye mr-3"></i>Inspect the source files of the framework</li>
+              <li class="fragment"><i class="text-success lnr lnr-database mr-3"></i>Understand the architecture of framework</li>
+              <li class="fragment"><i class="text-success lnr lnr-picture mr-3"></i>Inspect examples</li>
+              <li class="fragment"><i class="text-success lnr lnr-file-empty mr-3"></i>Find source files for the components</li>
+              <li class="fragment"><i class="text-success lnr lnr-neutral mr-3"></i>Check all the available variables in the framework (yes, scroll the whole file and read)</li>
+              <li class="fragment"><i class="text-success lnr lnr-sad mr-3"></i>Check component based variables. What you can to change? What result is expected?</li>
+              <li class="fragment"><i class="text-success lnr lnr-graduation-hat mr-3"></i>Find, change, check - repeat!</li>
+            </ol>
+          </section>
+          <section>
+            <h2 class="text-success">Things to do:</h2>
+            <div class="row">
+              <div class="col-6">
+                <div class="small">
+                  <h4>Check all the designs</h4>
+                  <ul>
+                    <li>Open each page, find colors/font-sizes/line-heights/etc</li>
+                    <li>Check repeating components</li>
+                    <li>Make a plan of development process, order of customization/creation/modification of components</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="small">
+                  <h4>Define global variables</h4>
+                  <ul>
+                    <li>Typography</li>
+                    <li>Colors</li>
+                    <li>Spacings</li>
+                    <li>General components</li>
+                    <li>Repeating components etc.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="row mb-5 pb-5">
+              <div class="col-6">
+                <div class="small">
+                  <h4>Make sure that you know which component should be "used here"</h4>
+                  <ul>
+                    <li>Open documentation side-by-side to the design</li>
+                    <li>Try to find closest component to the design and check how you can modify it</li>
+                    <li>Think about the modification of the component</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="small">
+                  <h4>Follow framework architecture in terms of custom component creation.</h4>
+                  <ul>
+                    <li>Custom variables - not for framework components only!</li>
+                    <li>While creating new component - keep the same code style, class naming-convention, code structure</li>
+                    <li>Add custom variables for your component into the file with custom framework variables.</li>
+                    <li>Keep well structured blocks of variables, group them by logic and type of CSS property</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <h3 class="text-success">Framework - first! Variables - for the success!</h3>
+          </section>
+        </section>
+        <section>
+          <h1>Closer to coding.</h1>
+        </section>
+        <section>
+          <h2>What is the main Bootstrap css unit?</h2>
+          <h3 class="fragment">There is very handy function in our functions file called <code>rem-calc();</code></h3>
+          <div class="row fragment">
+            <div class="col-7">
+              <h4>Function itself</h4>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// @location: base/_functions.scss
+// there is also em-calc function
+
+@function rem-calc($values, $base-value: $rem-base) {
+  $max: length($values);
+
+  @if $max == 1 {
+    @return convert-to-rem(nth($values, 1), $base-value);
+  }
+
+  $rem-values: ();
+  @for $i from 1 through $max {
+    $rem-values: append($rem-values, 
+                        convert-to-rem(nth($values, $i), 
+                        $base-value));
+  }
+  @return $rem-values;
+}
+</code></pre>
+            </div>
+            <div class="col-5">
+              <h4>How to use</h4>
+<pre><code class="hljs scss">
+// $rem-base: 10px;
+
+.card__thumbnail {
+  min-height: rem-calc(137);
+  position: relative;
+  overflow: hidden;
+}
+</code></pre>
+              <h4>Result in CSS</h4>
+<pre><code class="hljs scss">
+.card__thumbnail {
+  min-height: 13.7rem;
+  position: relative;
+  overflow: hidden;
+}
+</code></pre>
+            </div>
+          </div>
+        </section>
+        <section>
+          <section>
+            <h1>Variables</h1>
+            <p class="fragment text-danger">Main problem: lack of variables!</p>
+            <h3 class="fragment">Handy tips</h3>
+            <ol class="fragment">
+              <li>Variables grouping</li>
+              <li>Variables test</li>
+            </ol>
+          </section>
+          <section>
+            <h2>Variables grouping</h2>
+            <h3>Follow bootstrap style</h3>
+            <div class="row">
+              <div class="col-6">
+                <h4>Bootstrap variables file</h4>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// Buttons + Forms
+
+$input-btn-padding-y:         .375rem !default;
+$input-btn-padding-x:         .75rem !default;
+$input-btn-font-family:       null !default;
+$input-btn-font-size:         $font-size-base !default;
+$input-btn-line-height:       $line-height-base !default;
+
+$input-btn-focus-width:       .2rem !default;
+$input-btn-focus-color:       rgba($component-active-bg, .25) !default;
+$input-btn-focus-box-shadow:  0 0 0 $input-btn-focus-width $input-btn-focus-color !default;
+</code></pre>
+              </div>
+              <div class="col-6">
+                <h4>Our custom variables file</h4>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// Buttons + Forms
+
+$input-btn-padding-y:         .5rem;
+$input-btn-padding-x:         1rem;
+$input-btn-font-family:       null;
+$input-btn-font-size:         $font-size-base;
+$input-btn-line-height:       $line-height-base;
+
+$input-btn-focus-width:       .1rem;
+$input-btn-focus-color:       rgba($component-active-bg, .55);
+$input-btn-focus-box-shadow:  none;
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Try to avoid this</h2>
+            <div class="row">
+              <div class="col-6">
+                <h4>Our custom variables file <i class="lnr lnr-thumbs-down text-danger"></i></h4>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// some typography style
+$rem-base: 14px;
+$line-height-base: 1.5;
+$pink: pink;
+$dropdown-padding-y: 1rem;
+$body-bg: #fff;
+// ...
+</code></pre>
+              </div>
+              <div class="col-6">
+                <h4>Our custom variables file <i class="lnr lnr-thumbs-down text-danger"></i></h4>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+$white:  #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #868e96 !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black:  #000 !default;
+
+// if there is a !default flag in variables
+// this is a sign that you didn't change variables at all.
+// no !default flag in _bootstrap-custom.scss file
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Variables test. Use cases: grays, colors-palette</h2>
+            <p>Grays example</p>
+            <div class="row">
+              <div class="col-7">
+                <h3>elements-bootstrap.html</h3>
+<pre><code class="hljs html" data-trim data-line-numbers>
+<div class="my-40 d-flex flex-wrap">
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-gray-100"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-gray-200"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-gray-300"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-gray-400"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-gray-500"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-gray-600"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-gray-700"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-gray-800"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-gray-900"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-gray-950"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-gray-1000"></div>
+</div>
+
+<!-- Note additional class sg-theme-bg (just for example) -->
+</code></pre>
+              </div>
+              <div class="col-5">
+                <h3>SCSS</h3>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// for styleguide
+
+@each $color, $value in $grays {
+  .bg-gray-#{$color} {
+    background-color: $value !important;
+
+    &.sg-theme-bg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:after {
+        content: $color;
+        color: color-yiq($value);
+      }
+    }
+  }
+}
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Variables test. Grays - result</h2>
+            <img src="https://scrstorage.s3.amazonaws.com/DJM.com_2019-05-15_11-51-41.jpg" alt="" class="img-fluid d-block mx-auto mb-5">
+            <i>TIP: At the end of development you can comment this part of code, to not extend production size of CSS.</i>
+          </section>
+          <section>
+            <h2>Variables test. Theme colors example</h2>
+            <div class="row">
+              <div class="col-7">
+                <h3>elements-bootstrap.html</h3>
+<pre><code class="hljs html" data-trim data-line-numbers>
+<div class="my-40 d-flex flex-wrap">
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-primary"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-secondary"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-success"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-info"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-warning"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-danger"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-light"></div>
+  <div class="p-10 mr-10 mb-10 border sg-theme-bg bg-dark"></div>
+</div>
+<!-- Note additional class sg-theme-bg (just for example) -->
+</code></pre>
+              </div>
+              <div class="col-5">
+                <h3>SCSS</h3>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// for styleguide
+
+@each $color, $value in $theme-colors {
+  .bg-#{$color} {
+    &.sg-theme-bg {
+      &:after {
+        content: $color;
+        @if ($color == 'secondary') {
+          color: color-yiq(color-yiq($value));
+        } @else {
+          color: color-yiq($value);
+        }
+      }
+    }
+  }
+}
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Variables test. Theme colors - result</h2>
+            <img src="https://scrstorage.s3.amazonaws.com/DJM.com_2019-05-15_11-57-39.jpg" alt="" class="img-fluid d-block mx-auto mb-5">
+            <i>TIP: At the end of development you can comment this part of code, to not extend production size of CSS.</i>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Utilities</h1>
+          </section>
+          <section>
+            <h2>List of bootsrap utilities</h2>
+            <img src="https://scrstorage.s3.amazonaws.com/Borders__Bootstrap_2019-05-15_12-02-04.jpg" alt="" class="img-fluid d-block mx-auto">
+          </section>
+          <section>
+            <h2>My additions for utilities</h2>
+          </section>
+          <section>
+            <h3>Opacity for elements</h3>
+            <div class="row">
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// _bootstrap-custom.scss
+$elements-opacity: (
+  '46': .46,
+  '50': .5,
+  '66': .66,
+);
+
+// generate classes alpha-#{$value} to use like: alpha-10. 
+// SASS map $elements-opacity can be found 
+// in bootstrap-custom.scss
+@each $name, $value in $elements-opacity {
+  .alpha-#{$name} {
+    opacity: $value !important;
+  }
+}
+</code></pre>
+              </div>
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// trick for links
+a {
+  @include transition($btn-transition);
+  &[class*='alpha-'] {
+    @include transition(
+      $transition-fade, 
+      color $transition-duration-base
+    );
+    @include hover-focus {
+      opacity: 1 !important;
+    }
+  }
+}
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Headings sizes on responsive</h2>
+            <div class="row">
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// _bootstrap-custom.scss
+// mobile first sizes
+$h1-font-size:                2.5rem;
+$h2-font-size:                2.4rem;
+$h3-font-size:                2.2rem;
+$h4-font-size:                2rem;
+$h5-font-size:                1.9rem;
+$h6-font-size:                1.7rem;
+
+$headings-sizes-md: (
+  'h1': 3.2rem,
+  'h2': 3rem,
+  'h3': 2.8rem,
+  'h4': 2.5rem,
+  'h5': 2.2rem,
+  'h6': 2rem,
+);
+
+// can be other maps, for sm, lg, xl if needed.
+// the idea is to generate styles in loop
+</code></pre>
+              </div>
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// _typography.scss
+
+@each $name, $value in $headings-sizes-md {
+  @include media-breakpoint-up(md) {
+    #{$name},
+    .#{$name} {
+      font-size: $value;
+    }
+  }
+}
+
+// im avoiding styles like this:
+h1, .h1 {
+  @include media-breakpoint-up(md) {
+    font-size: 3.2rem;
+  }
+}
+// ...h2-h6
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Responsive heights for components</h2>
+            <div class="row">
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// bootstrap/utilities/ _sizing.scss
+
+// Width and height
+@each $prop, $abbrev in (width: w, height: h) {
+  @each $size, $length in $sizes {
+    .#{$abbrev}-#{$size} { #{$prop}: $length !important; }
+  }
+}
+
+.mw-100 { max-width: 100% !important; }
+.mh-100 { max-height: 100% !important; }
+
+// Viewport additional helpers
+
+.min-vw-100 { min-width: 100vw !important; }
+.min-vh-100 { min-height: 100vh !important; }
+
+.vw-100 { width: 100vw !important; }
+.vh-100 { height: 100vh !important; }
+</code></pre>
+              </div>
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// _common.scss
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+    .h#{$infix}-100vh {
+      height: 100vh !important;
+    }
+    .h#{$infix}-100 {
+      height: 100% !important;
+    }
+    .h#{$infix}-auto {
+      height: auto !important;
+    }
+  }
+}
+// and i can use this like
+// <div class="block h-auto h-md-100 h-lg-100vh"></div>
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>z-index</h2>
+            <div class="row">
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+$zindex-dropdown:                   1000 !default;
+$zindex-sticky:                     1020 !default;
+$zindex-fixed:                      1030 !default;
+$zindex-modal-backdrop:             1040 !default;
+$zindex-modal:                      1050 !default;
+$zindex-popover:                    1060 !default;
+$zindex-tooltip:                    1070 !default;
+
+// you dont need to override them.
+</code></pre>
+              </div>
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// bad
+.header {
+  position: fixed;
+  z-index: 9999;
+
+  @include media('screen', '>=tablet') {
+    position: static;
+  }
+}
+
+// good
+.header {
+  position: fixed;
+  z-index: $zindex-fixed;
+
+  @include media('screen', '>=tablet') {
+    position: static;
+  }
+}
+
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Breakpoints as variables from bootstrap</h2>
+            <div class="row">
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// bootstrap/_variables.scss
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 375px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1366px
+);
+</code></pre>
+              </div>
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// main.css
+// _include-media.scss breakpoints
+
+$breakpoints: (
+  'xs-phone': 320px,
+  'phone': 576px,
+  'tablet': 768px,
+  'desktop': 1024px,
+  'widescreen': 1200px
+);
+
+// so i need to revrite those when i 
+// change bootstrap breakpoints? damn..
+
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Breakpoints as variables from bootstrap</h2>
+            <div class="row">
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// bootstrap/_variables.scss
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 375px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1366px
+);
+</code></pre>
+              </div>
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// main.css
+// _include-media.scss breakpoints
+
+$breakpoints: (
+  'xs-phone': map-get($grid-breakpoints, 'xs'),
+  'phone': map-get($grid-breakpoints, 'sm'),
+  'tablet': map-get($grid-breakpoints, 'md'),
+  'desktop': map-get($grid-breakpoints, 'lg'),
+  'widescreen': map-get($grid-breakpoints, 'xl')
+);
+
+// much better 😙
+// PS. this is included by default in new gulp build
+
+</code></pre>
+              </div>
+            </div>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Some additional features</h1>
+          </section>
+          <section>
+            <h2>Bootstrap mixins modification</h2>
+            <h3>Use cases: when default component doesn't fit design and you need to override a lot of code</h3>
+          </section>
+          <section>
+            <h2>Example: dropdown toggle with caret</h2>
+            <div class="row">
+              <div class="col-6">
+                <h3>Bootstrap</h3>
+                <img src="https://scrstorage.s3.amazonaws.com/Dropdowns__Bootstrap_2019-05-15_12-42-41.jpg" alt="">
+              </div>
+              <div class="col-6">
+                <h3>Design</h3>
+                <img src="https://scrstorage.s3.amazonaws.com/DJM.com_2019-05-15_12-43-53.jpg" alt="">
+              </div>
+            </div>
+            <p>Of course, we can override everything in our css, remove default one, replace with other... But there are few types of dropdown direction (left,right,top,bottom), dropdown on top, dropdown on bottom.</p>
+            <p>Result: ~100 additional lines of code just for caret...</p>
+            <br>
+            <p>Lets remember the main rule or any framework: <span class="text-success">Change the source, not the result!</span></p>
+            <p>Lets find better solution</p>
+          </section>
+          <section>
+            <h2>How is dropdown developed in a bootstrap?</h2>
+            <div class="row">
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers="7-8">
+// bootstrap/components/_dropdown.scss
+// _...
+
+.dropdown-toggle {
+  white-space: nowrap;
+
+  // Generate the caret automatically
+  @include caret;
+}
+
+// ...
+
+</code></pre>
+              </div>
+              <div class="col-6 text-left">
+                <p>So, there is some mixin named caret that is used for caret generation.</p>
+                <p>Perfect, this is what we need</p>
+                <p>Checking mixin</p>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Dropdown caret mixin</h2>
+            <div class="row">
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers="4-9, 16-22">
+// bootstrap/mixins/_caret.scss
+// _...
+
+@mixin caret-down {
+  border-top: $caret-width solid;
+  border-right: $caret-width solid transparent;
+  border-bottom: 0;
+  border-left: $caret-width solid transparent;
+}
+
+// ..same for other direction, removed to save a space
+
+@mixin caret($direction: down) {
+  @if $enable-caret {
+    &::after {
+      @if $direction == down {
+        @include caret-down;
+      } @else if $direction == up {
+        @include caret-up;
+      } @else if $direction == right {
+        @include caret-right;
+      }
+    }
+  }
+}
+// ...
+</code></pre>
+              </div>
+              <div class="col-6 text-left">
+                <p>So, there are mixins for cared for each direction</p>
+                <p>What will change if i will modify them to use icon, for example?</p>
+                <p>Lets try</p>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Dropdown mixin modification</h2>
+            <p>After some research of code, i managed to modify mixins in a way, that all compoments that are generated will use my mixins prefer default one, but if there is no custom mixin - default is used.</p>
+            <div class="row">
+              <div class="col-6">
+                <h3>folder "base"</h3>
+                <img src="https://scrstorage.s3.amazonaws.com/frameworks.html__src_2019-05-15_13-02-04.jpg" class="float-left mr-5" alt="">
+                <p class="text-left">All rebuilded mixins should use the same name as in the bootstrap, for understanding if it's purpose</p>
+                <p class="text-left">One file = One mixin</p>
+              </div>
+              <div class="col-6">
+                <h3>_mixins-rebuild.scss</h3>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+@import '../vendors/icomoon/style';
+@import 'rebuilded-mixins/caret';
+
+// if you need to use icomoon variables - include them here
+// import each file of custom mixin
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Dropdown mixin modification: next step</h2>
+            <div class="row">
+              <div class="col-6">
+                <h3>bootstrap.scss</h3>
+<pre><code class="hljs scss" data-trim data-line-numbers="5">
+// ...
+@import 'vendors/bootstrap/functions';
+@import 'vendors/bootstrap/variables';
+@import 'vendors/bootstrap/mixins';
+@import 'base/mixin-rebuild';
+
+@import 'bootstrap-custom';
+// ...
+</code></pre>
+              </div>
+              <div class="col-6">
+                <h3>main.scss</h3>
+<pre><code class="hljs scss" data-trim data-line-numbers="6-7">
+//...
+@import 'vendors/bootstrap/mixins';
+
+@import 'base/functions';
+@import 'base/mixins';
+@import 'base/functions-rebuild';
+@import 'base/mixin-rebuild';
+@import 'base/helpers';
+
+@import 'components/typography';
+@import 'components/embed-responsive';
+//...
+</code></pre>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Dropdown mixin modification: final part</h2>
+            <h3>Lets modify mixin</h3>
+            <div class="row">
+              <div class="col-5">
+                <h4>_caret.scss</h4>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// bootstrap/mixins/_caret.scss
+// ...
+
+@mixin caret-down {
+  content: $icon-chevron-down;
+}
+
+@mixin caret-up {
+  content: $icon-chevron-up;
+}
+
+@mixin caret-right {
+  content: $icon-chevron-right;
+}
+
+@mixin caret-left {
+  content: $icon-chevron-left;
+}
+
+// ...
+// dont forget to extend %icon styles for pseudo
+</code></pre>
+              </div>
+              <div class="col-7">
+                <h4>Compiled result</h4>
+                <img src="https://scrstorage.s3.amazonaws.com/DevTools_-_localhost3000index.html_2019-05-15_13-14-43.jpg" alt="">
+                <br>
+                <img src="https://scrstorage.s3.amazonaws.com/DJM.com_2019-05-15_13-16-36.jpg" alt="">
+              </div>
+            </div>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Color themes</h1>
+            <h4>Bootstrap documentation about this <a href="https://getbootstrap.com/docs/4.3/getting-started/theming/">https://getbootstrap.com/docs/4.3/getting-started/theming/</a></h4>
+          </section>
+          <section>
+            <h3>How i manage to create themes in my projects</h3>
+            <br>
+            <p>First of all - decide, which colors will be used as themes. If this is described by the client - perfect, but this is not always like this.</p>
+            <p>Don't make a lot of themes (if there is no requirement for this) - only main colors</p>
+          </section>
+          <section>
+            <h3>Real project example</h3>
+            <p>Bootstrap recommend to use their <span class="text-success">$theme-colors</span> map for theming. But this is not a case in my project 😆 Why? Because there was a TON of colors that are used throught the site, and all of them should be in <span class="text-success">$theme-colors</span>.</p>
+            <div class="row">
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// _bootstrap-custom.scss
+$theme-colors: ();
+$theme-colors: map-merge((
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "opaque":      $opaque,
+  "gray-lightest":   $gray-lightest,
+  "gray":            $gray,
+  "gray-dark":       $gray-dark,
+  "secondary-blue":         $secondary-blue,
+  "primary-blue":           $primary-blue,
+  "primary-blue-light":     $primary-blue-light,
+  "primary-blue-dark":      $primary-blue-dark,
+  "primary-green":          $primary-green,
+  "primary-green-light":    $primary-green-light,
+  "primary-green-dark":     $primary-green-dark,
+  "secondary-yellow":       $secondary-yellow,
+  "secondary-yellow-light": $secondary-yellow-light,
+  "secondary-yellow-dark":  $secondary-yellow-dark,
+  "secondary-green":        $secondary-green,
+  "secondary-green-light":  $secondary-green-light,
+  "secondary-green-dark":   $secondary-green-dark,
+  "secondary-red":          $secondary-red,
+  "secondary-red-light":    $secondary-red-light,
+  "secondary-red-dark":     $secondary-red-dark,
+  "secondary-purple":       $secondary-purple,
+  "secondary-purple-light": $secondary-purple-light,
+  "secondary-purple-dark":  $secondary-purple-dark
+), $theme-colors);
+</code></pre>
+              </div>
+              <div class="col-6">
+                <p class="small text-left">But from the client requirement - i need only 8 themes. So, i decided to create new sass-map with those themes.</p>
+<pre><code class="hljs scss" data-trim data-line-numbers>
+// components/_themes.scss
+$themes: (
+  'gray',
+  'gray-dark',
+  'primary-blue-dark',
+  'primary-green-dark',
+  'secondary-yellow-dark',
+  'secondary-green-dark',
+  'secondary-red-dark',
+  'secondary-purple-dark'
+);
+</code></pre>
+                <p class="small text-left">I created separate file for this called _themes.scss and put it inside /components folder</p>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Idea around this</h2>
+            <p>The design requires to change gradienst/backgrounds with opacity/backgrounds etc.</p>
+            <p>There was a lot of "theme depended" components</p>
+            <div class="row">
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+$themes: (
+  'gray',
+  'gray-dark',
+  'primary-blue-dark',
+  'primary-green-dark',
+  'secondary-yellow-dark',
+  'secondary-green-dark',
+  'secondary-red-dark',
+  'secondary-purple-dark'
+);
+
+.page-overlay {
+  @for $i from 1 through length($themes) {
+    .theme-#{nth($themes, $i)} & {
+      background-color: theme-color(nth($themes, $i));
+    }
+    .visual-added.theme-#{nth($themes, $i)} & {
+      background-color: transparent;
+      background-image: linear-gradient(180deg, 
+        rgba(theme-color(nth($themes, $i)), 0.59) 0%, 
+        theme-color(nth($themes, $i)) 100%);
+    }
+  }
+}
+</code></pre>
+              </div>
+              <div class="col-6">
+                <img src="https://scrstorage.s3.amazonaws.com/DevTools_-_fileUsersalekseyDesktopInternationalSchoolOfBillundmarkupdistpop.html_2019-05-15_14-12-38.jpg" class="d-block" alt="">
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>The whole file is loofing like this</h2>
+            <div class="row">
+              <div class="col-8">
+<pre><code class="hljs scss" data-trim data-line-numbers>
+/* site themes styles */
+
+
+/* SCSS map of theme variables.
+   If you want to add another theme, 
+   just add new key name to the $themes map 
+   and rebuild SCSS files using Grunt. 
+   The new theme can be used as 
+   .theme-"new-theme-name" on body element.
+*/
+
+$themes: (
+  'gray',
+  'gray-dark',
+  'primary-blue-dark',
+  'primary-green-dark',
+  'secondary-yellow-dark',
+  'secondary-green-dark',
+  'secondary-red-dark',
+  'secondary-purple-dark'
+);
+
+.page-overlay {
+  @for $i from 1 through length($themes) {
+    .theme-#{nth($themes, $i)} & {
+      background-color: theme-color(nth($themes, $i));
+    }
+    .visual-added.theme-#{nth($themes, $i)} & {
+      background-color: transparent;
+      background-image: linear-gradient(180deg, rgba(theme-color(nth($themes, $i)), 0.59) 0%, theme-color(nth($themes, $i)) 100%);
+    }
+  }
+}
+
+.header {
+  &.header-fixed {
+    .navbar {
+      @for $i from 1 through length($themes) {
+        .template-transparent.theme-#{nth($themes, $i)} & {
+          background-color: theme-color(nth($themes, $i));
+        }
+      }
+    }
+  }
+}
+
+ul {
+  li {
+    &:after {
+      @for $i from 1 through length($themes) {
+        .theme-#{nth($themes, $i)} & {
+          background-color: theme-color(nth($themes, $i));
+        }
+      }
+    }
+  }
+}
+
+a:not(.btn) {
+  @for $i from 1 through length($themes) {
+    .theme-#{nth($themes, $i)} & {
+      color: theme-color(nth($themes, $i));
+      &:hover {
+        color: darken(theme-color(nth($themes, $i)), 10%);
+      }
+    }
+  }
+}
+
+.hero-section {
+  &:before {
+    @for $i from 1 through length($themes) {
+      .theme-#{nth($themes, $i)} & {
+        background-color: theme-color(nth($themes, $i));
+      }
+    }
+  }
+  &__title {
+    @for $i from 1 through length($themes) {
+      .theme-#{nth($themes, $i)} & {
+        color: color-yiq(theme-color(nth($themes, $i)));
+      }
+    }
+  }
+}
+
+.headline-block {
+  @for $i from 1 through length($themes) {
+    .theme-#{nth($themes, $i)} & {
+      color: color-yiq(theme-color(nth($themes, $i)));
+    }
+  }
+}
+
+.additional-nav {
+  @for $i from 1 through length($themes) {
+    @if (nth($themes, $i) == 'gray' and nth($themes, $i) != 'gray-dark') {
+      .theme-#{nth($themes, $i)} & {
+        background-color: darken(theme-color(nth($themes, $i)), 11.96);
+      }
+    } @else {
+      .theme-#{nth($themes, $i)} & {
+        background-color: darken(saturate(theme-color(nth($themes, $i)), 23.99), 11.96);
+      }
+    }
+  }
+  .nav-link {
+    @for $i from 1 through length($themes) {
+      .theme-#{nth($themes, $i)} & {
+        color: color-yiq(theme-color(nth($themes, $i)));
+        &:hover {
+          color: darken(color-yiq(theme-color(nth($themes, $i))), 10%);
+        }
+      }
+    }
+  }
+}
+
+.testimonial-carousel {
+  &:not(.picked-color) {
+    @for $i from 1 through length($themes) {
+      $theme-name: str-replace(nth($themes, $i), '-dark', '');
+      .theme-#{nth($themes, $i)} & {
+        @if (nth($themes, $i) == 'gray-dark') {
+          background-color: theme-color(nth($themes, $i)) !important;
+        } @else {
+          background-color: theme-color($theme-name) !important;
+        }
+      }
+    }
+  }
+}
+
+.slick-dots {
+  button {
+    @for $i from 1 through length($themes) {
+      .theme-#{nth($themes, $i)} & {
+        background-color: theme-color(nth($themes, $i));
+      }
+    }
+  }
+}
+
+.breadcrumb {
+  .breadcrumb-item {
+    a:not(.btn) {
+      @for $i from 1 through length($themes) {
+        .theme-#{nth($themes, $i)} & {
+          &:hover {
+            color: darken(theme-color(nth($themes, $i)), 10%);
+          }
+        }
+      }
+    }
+  }
+}
+
+.flexible-box {
+  &--no-visual {
+    .flexible-box {
+      &__holder {
+        @for $i from 1 through length($themes) {
+          .theme-#{nth($themes, $i)} & {
+            background-color: theme-color(nth($themes, $i));
+          }
+        }
+      }
+    }
+  }
+}
+
+.visual-section {
+  &__pause {
+    &:hover {
+      @for $i from 1 through length($themes) {
+        .theme-#{nth($themes, $i)} & {
+          color: darken(theme-color(nth($themes, $i)), 10%);
+        }
+      }
+    }
+  }
+}
+
+</code></pre>
+              </div>
+              <div class="col-4">
+                <h4>Why this way?</h4>
+                <ol class="text-left">
+                  <li>This is the same CSS dependency tree, that is used in styles for those components</li>
+                  <li>There was some additional class dependencies on body, for theming</li>
+                  <li>This is was best use case for this particular project</li>
+                </ol>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>One more approach for theming: using "body" dependent CSS.</h2>
+            <div class="row">
+              <div class="col-6">
+<pre><code class="hljs scss" data-trim data-line-numbers="4-17">
+// ... same themes
+
+@for $i from 1 through length($themes) {
+  .theme-#{nth($themes, $i)} {
+    .page-overlay {
+      background-color: theme-color(nth($themes, $i));
+    }
+  }
+  .visual-added.theme-#{nth($themes, $i)} {
+    .page-overlay {
+      background-color: transparent;
+      background-image: linear-gradient(180deg, 
+        rgba(theme-color(nth($themes, $i)), 0.59) 0%, 
+        theme-color(nth($themes, $i)) 100%);
+    }
+  }
+}
+</code></pre>
+              </div>
+              <div class="col-6">
+                <ol class="text-left">
+                  <li>You can see the defference, that i need to add 2 different classes for body and body + additional class. and then nest .page-overlay with different states</li>
+                  <li>This is the only one example, but there was a lot of elements depended on body class, and .class &, &.class - give me wrong result</li>
+                  <li>There are much more code in SCSS</li>
+                  <li>But this is still a use case</li>
+                </ol>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Bootstrap theming: conclusion</h2>
+            <ol>
+              <li>Only colors that you need should be used as a theme. Remember, that CSS output much longer then SCSS</li>
+              <li>Always use SCSS power: variables, maps, loops, mixins, nesting, extends, everything - that will help you to create expandable, editable, understandable code.</li>
+              <li>Always think about feedback: request to change color, request to remove component from theming, request to add colors, etc.</li>
+              <li>Better to keep this in separate file: easier to add/remove</li>
+              <li>Even if there is no comments in requirements - try to document HOW TO USE this. This is will be a huge Plus to your carma.</li>
+              <li>Try to found best "USE CASE" in this particular project. One approach can be perfect for this project - but bad for another.</li>
+              <li>Research for different approaches, blogs, etc. Always improve yourself as a developer. Dont be "straightforward" developer.</li>
+            </ol>
+          </section>
+        </section>
+        <section>
+          <h1>Namaste 🙏</h1>
+        </section>
+      </div>
+    </div>
+
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        hash: true,
+        width: "100%",
+        height: "100%",
+        // minScale: 1,
+        // maxScale: 1,
+        // Push each slide change to the browser history. Implies `hash: true`
+        history: true,
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: () => {
+            [].forEach.call( document.querySelectorAll( '.code-highlight'  ), function( v, i ) {
+              hljs.highlightBlock(v);
+            });
+          } }
+        ]
+      });
+      
+    </script>
+  </body>
+</html>
